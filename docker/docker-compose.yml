@@ -14,7 +14,7 @@ services:
 # -----------------------------------------------------------------------------
   elasticsearch:
 # -----------------------------------------------------------------------------
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:latest
     hostname: elasticsearch
     environment:
       - node.name=elasticsearch
@@ -34,7 +34,7 @@ services:
   elasticsearch_exporter:
 # -----------------------------------------------------------------------------
     hostname: elasticsearch_exporter
-    image: justwatch/elasticsearch_exporter:1.1.0
+    image: justwatch/elasticsearch_exporter:latest
     depends_on:
       - elasticsearch
     command:
@@ -48,7 +48,7 @@ services:
   logstash:
 # -----------------------------------------------------------------------------
     hostname: logstash
-    image: docker.elastic.co/logstash/logstash:7.3.2
+    image: docker.elastic.co/logstash/logstash:latest
     depends_on:
       - elasticsearch
     volumes:
@@ -71,7 +71,7 @@ services:
 # -----------------------------------------------------------------------------
   filebeat:
 # -----------------------------------------------------------------------------
-    image: docker.elastic.co/beats/filebeat:7.3.2
+    image: docker.elastic.co/beats/filebeat:latest
     hostname: filebeat
     user: root
     volumes:
@@ -101,7 +101,7 @@ services:
 # -----------------------------------------------------------------------------
   kibana:
 # -----------------------------------------------------------------------------
-    image: docker.elastic.co/kibana/kibana:7.3.2
+    image: docker.elastic.co/kibana/kibana:latest
     hostname: kibana
     depends_on:
       - elasticsearch
@@ -113,7 +113,7 @@ services:
 # -----------------------------------------------------------------------------
   prometheus:
 # -----------------------------------------------------------------------------
-    image: prom/prometheus:v2.12.0
+    image: prom/prometheus:latest
     hostname: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -131,7 +131,7 @@ services:
 # -----------------------------------------------------------------------------
   alertmanager:
 # -----------------------------------------------------------------------------
-    image: prom/alertmanager:v0.19.0
+    image: prom/alertmanager:latest
     hostname: alertmanager
     depends_on:
       - prometheus
@@ -146,7 +146,7 @@ services:
 # -----------------------------------------------------------------------------
   nodeexporter:
 # -----------------------------------------------------------------------------
-    image: prom/node-exporter:v0.18.1
+    image: prom/node-exporter:latest
     hostname: nodeexporter
     user: root
     volumes:
@@ -163,7 +163,7 @@ services:
 # -----------------------------------------------------------------------------
   cadvisor:
 # -----------------------------------------------------------------------------
-    image: google/cadvisor:v0.33.0
+    image: google/cadvisor:latest
     hostname: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -177,7 +177,7 @@ services:
 # -----------------------------------------------------------------------------
   grafana:
 # -----------------------------------------------------------------------------
-    image: grafana/grafana:6.3.5
+    image: grafana/grafana:latest
     hostname: grafana
     volumes:
       - grafana:/var/lib/grafana
@@ -195,7 +195,7 @@ services:
 # -----------------------------------------------------------------------------
   pushgateway:
 # -----------------------------------------------------------------------------
-    image: prom/pushgateway:v0.9.1
+    image: prom/pushgateway:latest
     hostname: pushgateway
     networks:
       - net
